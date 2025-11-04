@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Rosette — Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <h1>Rosette Atteya</h1>
+          <p class="role">Data Analyst • Student</p>
+        </div>
+
+        <nav aria-label="Main navigation" class="nav">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- About / Hero -->
+      <section id="about" class="hero">
+        <div class="hero-left">
+          <h2>Hello, I turn data into clear stories</h2>
+          <p class="lead">
+            I analyze, visualize, and communicate data using Python, SQL and
+            Excel. I enjoy turning messy tables into simple insights.
+          </p>
+          <ul class="meta">
+            <li><strong>Location:</strong> Cairo, Egypt</li>
+            <li>
+              <strong>Contact:</strong>
+              <a href="mailto:youremail@example.com">rozet.atia@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <aside class="hero-right" aria-labelledby="profile-heading">
+          <h3 id="profile-heading"
+        </aside>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="projects">
+        <h3>Selected Projects</h3>
+
+        <div class="cards">
+          <article class="card">
+            <h4>TB Dashboard</h4>
+            <p class="small">
+              Excel / Power BI — Visual dashboard of TB burden by country.
+            </p>
+            <p class="links">
+              <a href="#" target="_blank" rel="noopener">View</a> ·
+              <a href="#" target="_blank" rel="noopener">Code</a>
+            </p>
+          </article>
+
+          <article class="card">
+            <h4>Churn Model</h4>
+            <p class="small">
+              Python / scikit-learn — Binary classification with feature
+              engineering.
+            </p>
+            <p class="links">
+              <a href="#" target="_blank" rel="noopener">Report</a>
+            </p>
+          </article>
+
+          <article class="card">
+            <h4>Sales ETL</h4>
+            <p class="small">
+              SQL &amp; Python — Automated cleaning and weekly reporting
+              pipeline.
+            </p>
+            <p class="links">
+              <a href="#" target="_blank" rel="noopener">Docs</a>
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="contact">
+        <h3>Contact Me</h3>
+        <p>
+          If you’d like to work together send a short message below or email me
+          directly.
+        </p>
+
+        <!-- Simple mailto form (client fallback). Replace action with a real endpoint for production. -->
+        <form
+          class="contact-form"
+          action="mailto:youremail@example.com"
+          method="post"
+          enctype="text/plain"
+        >
+          <label>
+            Name
+            <input type="text" name="name" required />
+          </label>
+
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+
+          <label>
+            Message
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button class="btn" type="submit">Send</button>
+            <a class="btn ghost" href="mailto:youremail@example.com"
+              >Email directly</a
+            >
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>
+          © <span id="year"></span> Rosette Atteya — Built with HTML &amp; CSS
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // set current year
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

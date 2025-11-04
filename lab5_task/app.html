@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Watchlist</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #ece9e6, #ffffff);
+        text-align: center;
+        padding: 30px;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      .movie-card {
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        margin: 15px auto;
+        padding: 20px;
+        width: 320px;
+        transition: 0.3s;
+      }
+
+      .movie-card:hover {
+        transform: scale(1.05);
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 12px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      input, textarea, select {
+        padding: 6px;
+        margin: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      .stars {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React and ReactDOM from CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+    <script type="text/babel">
+      function MovieCard({ movie, onRemove }) {
+        return (
+          <div className="movie-card">
+            <h3>{movie.title}</h3>
+            <p>Released: {movie.year}</p>
+            <p>⭐ Rating: {"⭐".repeat(movie.rating)}</p>
+            <p><b>Review:</b> {movie.review}</p>
+            <button onClick={() => onRemove(movie.title)}>🗑 Remove</button>
+          </div>
+        );
+      }
+
+      function App() {
+        const [movies, setMovies] = React.useState([
+          { title: "Inception", year: 2010, review: "Mind-blowing!", rating: 5 },
+          { title: "Interstellar", year: 2014, review: "Beautifully emotional", rating: 4 },
+        ]);
+
+        const [newTitle, setNewTitle] = React.useState("");
+        const [newYear, setNewYear] = React.useState("");
+        const [newReview, setNewReview] = React.useState("");
+        const [newRating, setNewRating] = React.useState(3);
+
+        const addMovie = () => {
+          if (!newTitle || !newYear) {
+            alert("Please enter both title and year!");
+            return;
+          }
+          const newMovie = {
+            title: newTitle,
+            year: newYear,
+            review: newReview || "No review added.",
+            rating: parseInt(newRating),
+          };
+          setMovies([...movies, newMovie]);
+          setNewTitle("");
+          setNewYear("");
+          setNewReview("");
+          setNewRating(3);
+        };
+
+        const removeMovie = (title) => {
+          setMovies(movies.filter((m) => m.title !== title));
+        };
+
+        return (
+          <div>
+            <h1>🎬 My Movie Watchlist</h1>
+
+            <div style={{ marginBottom: "20px" }}>
+              <input
+                type="text"
+                placeholder="Movie Title"
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Year"
+                value={newYear}
+                onChange={(e) => setNewYear(e.target.value)}
+              />
+              <textarea
+                placeholder="Write a short review..."
+                rows="2"
+                value={newReview}
+                onChange={(e) => setNewReview(e.target.value)}
+              ></textarea>
+              <br />
+              <label>Rating: </label>
+              <select value={newRating} onChange={(e) => setNewRating(e.target.value)}>
+                {[1, 2, 3, 4, 5].map((num) => (
+                  <option key={num} value={num}>
+                    {"⭐".repeat(num)}
+                  </option>
+                ))}
+              </select>
+              <br />
+              <button onClick={addMovie}>➕ Add Movie</button>
+            </div>
+
+            {movies.map((movie, index) => (
+              <MovieCard key={index} movie={movie} onRemove={removeMovie} />
+            ))}
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

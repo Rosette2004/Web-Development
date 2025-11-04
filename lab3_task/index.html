@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Interactive Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container" aria-label="Calculator">
+      <h1 class="sr-only">Interactive Calculator</h1>
+
+      <div class="calculator" role="application" aria-label="Calculator">
+        <div class="display" id="display" aria-live="polite" aria-atomic="true">
+          <div id="expression" class="expression"></div>
+          <div id="result" class="result">0</div>
+        </div>
+
+        <div class="keys">
+          <button
+            class="btn light"
+            data-action="all-clear"
+            aria-label="All clear"
+          >
+            AC
+          </button>
+          <button class="btn light" data-action="delete" aria-label="Delete">
+            ⌫
+          </button>
+          <button class="btn light" data-action="percent" aria-label="Percent">
+            %
+          </button>
+          <button class="btn op" data-value="÷" aria-label="Divide">÷</button>
+
+          <button class="btn" data-value="7">7</button>
+          <button class="btn" data-value="8">8</button>
+          <button class="btn" data-value="9">9</button>
+          <button class="btn op" data-value="×" aria-label="Multiply">×</button>
+
+          <button class="btn" data-value="4">4</button>
+          <button class="btn" data-value="5">5</button>
+          <button class="btn" data-value="6">6</button>
+          <button class="btn op" data-value="-" aria-label="Minus">−</button>
+
+          <button class="btn" data-value="1">1</button>
+          <button class="btn" data-value="2">2</button>
+          <button class="btn" data-value="3">3</button>
+          <button class="btn op" data-value="+" aria-label="Plus">+</button>
+
+          <button class="btn zero" data-value="0">0</button>
+          <button class="btn" data-value=".">.</button>
+          <button class="btn equals" data-action="equals" aria-label="Equals">
+            =
+          </button>
+        </div>
+      </div>
+
+      <p class="hint">
+        You can also use your keyboard (numbers, + - * / Enter Backspace Esc).
+      </p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

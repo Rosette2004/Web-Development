@@ -1,0 +1,209 @@
+/* styles.css - iOS-style dark calculator (matches the photo) */
+
+:root {
+  --bg-page: #0b0b0d; /* page background */
+  --panel: #1c1c1e; /* calculator panel */
+  --display-bg: #18181a; /* display area */
+  --muted: #9ca3af; /* small grey text */
+  --num-key: #2c2c2e; /* dark numeric keys */
+  --func-key: #d4d4d2; /* light function keys (AC, % , etc) */
+  --op-key: #ff9500; /* orange operator keys */
+  --text-light: #ffffff;
+  --shadow-1: 0 6px 18px rgba(0, 0, 0, 0.6);
+  --shadow-2: 0 3px 8px rgba(0, 0, 0, 0.6);
+  --radius: 22px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 1) 0%,
+    rgba(15, 15, 15, 1) 100%
+  );
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* center the calculator on page like the photo (left area empty) */
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px;
+  gap: 20px;
+  flex-direction: column;
+}
+
+/* Calculator panel */
+.calculator {
+  width: 360px;
+  background: transparent; /* mimic photo - no white panel */
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* subtle glow to separate from page */
+}
+
+/* Display (dark glass) */
+.display {
+  background: linear-gradient(
+    180deg,
+    rgba(34, 34, 36, 0.95),
+    rgba(24, 24, 26, 0.98)
+  );
+  border-radius: 18px;
+  padding: 22px 18px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 6px;
+  box-shadow: var(--shadow-1), inset 0 -1px 0 rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* expression (small, muted) */
+.expression {
+  font-size: 15px;
+  color: var(--muted);
+  width: 100%;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* result (large, bold, white) */
+.result {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--text-light);
+  width: 100%;
+  text-align: right;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Keys grid like iOS */
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 6px;
+}
+
+/* Base button look: circular, big, tactile */
+.btn {
+  height: 72px;
+  border-radius: 999px; /* circular pill shape; zero will stretch */
+  border: 0;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-2);
+  transition: transform 0.06s ease, box-shadow 0.06s ease, filter 0.06s ease;
+}
+
+/* press effect */
+.btn:active {
+  transform: translateY(2px) scale(0.998);
+  filter: brightness(0.96);
+}
+
+/* numeric keys (dark) */
+.btn:not(.op):not(.light):not(.equals) {
+  background: linear-gradient(180deg, #2b2b2d, #232325);
+  color: var(--text-light);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* function keys (AC, % , delete) - light grey, dark text */
+.btn.light {
+  background: linear-gradient(180deg, #f0f0f0, #d9d9d9);
+  color: #0b0b0d;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* operator keys - orange */
+.btn.op {
+  background: linear-gradient(180deg, #ff9e2f, #ff7b00);
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(255, 123, 0, 0.18);
+}
+
+/* equals button - same orange, placed right column and full height of bottom row */
+.btn.equals {
+  background: linear-gradient(180deg, #ff9e2f, #ff7b00);
+  color: white;
+  font-weight: 700;
+  grid-column: 4 / 5;
+  grid-row: 5 / 6;
+  height: 152px; /* double height to match photo */
+  align-self: stretch;
+  box-shadow: 0 10px 26px rgba(255, 123, 0, 0.22);
+}
+
+/* zero wide */
+.btn.zero {
+  grid-column: 1 / 3;
+  justify-content: flex-start;
+  padding-left: 28px;
+  height: 72px;
+  border-radius: 40px;
+}
+
+/* reduce spacing on small screens */
+@media (max-width: 400px) {
+  .calculator {
+    width: 94vw;
+  }
+  .result {
+    font-size: 36px;
+  }
+  .btn {
+    height: 60px;
+    font-size: 20px;
+  }
+  .btn.equals {
+    height: 120px;
+  }
+}
+
+/* hint text (hidden to mimic the photo where no hint exists) */
+.hint {
+  display: none;
+}
+
+/* visually hidden (for accessible headings) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
